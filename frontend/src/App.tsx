@@ -17,12 +17,7 @@ function App() {
 
 
         fetch(api(input)).then(data => data.json()).then(data => {
-            if (!data.rain) {
-                alert("Very sorry, due to the free tier, some data isn't available for all the mentioned states and UTs");
-                return;
-            }
-
-            const ppt = data.rain['1h'];
+            const ppt = data.rain ? data.rain['1h'] : 0;
             const elevation = Math.abs(data.main.sea_level - data.main.grnd_level);
 
             setStatus(Model(ppt, elevation));
